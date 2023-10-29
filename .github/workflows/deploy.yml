@@ -25,5 +25,5 @@ jobs:
     - name: Terraform Apply
       run: terraform apply -auto-approve
 
-    - name: Show RDS Endpoint
-      run: echo "RDS Endpoint: $(terraform output rds_endpoint)"
+    # - name: Show RDS Endpoint
+    #   run: echo "RDS Endpoint: $(terraform output rds_endpoint)"
