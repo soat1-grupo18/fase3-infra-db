@@ -15,6 +15,7 @@ resource "aws_db_instance" "fiap_food_api" {
   engine                  = "postgres"
   engine_version          = "15.3"
   instance_class          = "db.t3.micro"
+  identifier              = "fiap-food-api"
   db_name                 = "fiap_food_api"
   username                = "dbuser"
   password                = "dbpassword"
