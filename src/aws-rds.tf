@@ -23,5 +23,5 @@ resource "aws_db_instance" "fiap_food_api" {
   backup_retention_period = 0
   apply_immediately       = true
 
-  db_subnet_group_name = aws_db_subnet_group.private_subnets.name
+  db_subnet_group_name = aws_db_subnet_group.fiap_private_subnets.name
 }
