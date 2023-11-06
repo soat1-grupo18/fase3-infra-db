@@ -1,3 +1,9 @@
+data "aws_vpc" "fiap" {
+  tags = {
+    "Name" = "fiap-vpc"
+  }
+}
+
 data "aws_subnets" "private" {
   tags = {
     "fiap-private-subnet" = "true"
@@ -25,4 +31,27 @@ resource "aws_db_instance" "fiap_food_api" {
   apply_immediately       = true
 
   db_subnet_group_name = aws_db_subnet_group.fiap_private_subnets.name
+  vpc_security_group_ids = [
+    aws_security_group.allow_same_vpc.id
+  ]
+}
+
+resource "aws_security_group" "allow_same_vpc" {
+  name   = "Allow same VPC"
+  vpc_id = data.aws_vpc.fiap.id
+
+  ingress {
+    description = "TLS from VPC"
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = data.aws_vpc.fiap.cidr_block_associations[*].cidr_block
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
