@@ -5,7 +5,7 @@ data "aws_subnets" "private" {
 }
 
 resource "aws_db_subnet_group" "private_subnets" {
-  name       = "rds-private-subnets"
+  name       = "fiap-private-subnets"
   subnet_ids = data.aws_subnets.private.ids
 }
 
@@ -15,6 +15,7 @@ resource "aws_db_instance" "soat1" {
   engine                  = "postgres"
   engine_version          = "15.3"
   instance_class          = "db.t3.micro"
+  db_name                 = "fiap-food-api"
   username                = "dbuser"
   password                = "dbpassword"
   parameter_group_name    = "default.postgres15"
