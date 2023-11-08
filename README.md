@@ -1,5 +1,6 @@
 # fase3-infra-db
-Infra banco de dados gerenciável com Terraform
+
+Infra banco de dados gerenciável com Terraform.
 
 - [Tech Challenge](#tech-challenge)
   - [Alunos](#alunos)
